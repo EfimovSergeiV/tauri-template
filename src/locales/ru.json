@@ -1,0 +1,47 @@
+{
+  "app": {
+    "title": "Навигация между страницами"
+  },
+  "menu": {
+    "home": "Главная",
+    "charts": "Графики",
+    "settings": "Настройки",
+    "darkmode": "Сменить тему",
+    "about": "О программе",
+    "language": "Язык интерфейса",
+    "themeDark": "Тёмная тема",
+    "themeLight": "Светлая тема"
+  },
+  "test": {
+    "PropertyName": "Название свойства",
+    "PropertyValue": "Значение"
+  },
+  "components": {
+    "Foo": "from JSX",
+    "ImportType": "import type should be removed without side-effect"
+  },
+  "pages": {
+    "home": {
+      "title": "Python в Tauri",
+      "description": "Введите число, приложение передаст его в Python и покажет результат умножения на 4.",
+      "inputLabel": "Число",
+      "placeholder": "Например, 3.5",
+      "submit": "Умножить на 4",
+      "loading": "Вычисляем...",
+      "result": "Результат: {value}",
+      "errors": {
+        "invalidNumber": "Введите корректное число.",
+        "pythonFailed": "Не удалось выполнить Python-скрипт."
+      },
+      "count": "count is: {value}",
+      "virtual": "msg from virtual module: {msg}",
+      "inter": "this will be styled with a font-face"
+    },
+    "about": {
+      "title": "О проекте",
+      "description1": "Это шаблон desktop-приложения на Tauri с фронтендом на Vue 3 и маршрутизацией через vue-router.",
+      "description2": "Главная страница показывает рабочий пример вызова команды Tauri, где Rust запускает Python-скрипт и возвращает результат обратно в интерфейс.",
+      "description3": "Страница about нужна как отдельный route, чтобы приложение уже было готово к дальнейшему разнесению экранов по страницам."
+    }
+  }
+}

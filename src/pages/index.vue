@@ -1,11 +1,13 @@
 <script setup>
 import { ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { invoke } from "@tauri-apps/api/core";
 
 const inputValue = ref("");
 const result = ref("");
 const errorMessage = ref("");
 const isLoading = ref(false);
+const { t } = useI18n();
 
 async function multiplyByFour() {
   errorMessage.value = "";
@@ -13,7 +15,7 @@ async function multiplyByFour() {
 
   const numericValue = Number(inputValue.value);
   if (Number.isNaN(numericValue)) {
-    errorMessage.value = "Введите корректное число.";
+    errorMessage.value = t("pages.home.errors.invalidNumber");
     return;
   }
 
@@ -23,7 +25,7 @@ async function multiplyByFour() {
     const response = await invoke("multiply_by_four", { value: numericValue });
     result.value = String(response);
   } catch (error) {
-    errorMessage.value = typeof error === "string" ? error : "Не удалось выполнить Python-скрипт.";
+    errorMessage.value = typeof error === "string" ? error : t("pages.home.errors.pythonFailed");
   } finally {
     isLoading.value = false;
   }
@@ -34,14 +36,14 @@ async function multiplyByFour() {
 <template>
   <section class="w-full max-w-md rounded-2xl bg-white p-6 shadow-lg shadow-gray-500/20 dark:bg-gray-800">
     <div class="mb-6">
-      <h2 class="text-2xl font-semibold">Python в Tauri</h2>
+      <h2 class="text-2xl font-semibold">{{ t("pages.home.title") }}</h2>
       <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
-        Введите число, приложение передаст его в Python и покажет результат умножения на 4.
+        {{ t("pages.home.description") }}
       </p>
     </div>
 
     <label class="mb-2 block text-sm font-medium" for="number-input">
-      Число
+      {{ t("pages.home.inputLabel") }}
     </label>
     <input
       id="number-input"
@@ -49,7 +51,7 @@ async function multiplyByFour() {
       type="number"
       step="any"
       class="w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-3 outline-none transition focus:border-gray-500 dark:border-gray-600 dark:bg-gray-900"
-      placeholder="Например, 3.5"
+      :placeholder="t('pages.home.placeholder')"
       @keyup.enter="multiplyByFour"
     />
 
@@ -59,12 +61,12 @@ async function multiplyByFour() {
       :disabled="isLoading"
       @click="multiplyByFour"
     >
-      {{ isLoading ? "Вычисляем..." : "Умножить на 4" }}
+      {{ isLoading ? t("pages.home.loading") : t("pages.home.submit") }}
     </button>
 
     <div class="mt-4 h-10">
       <p v-if="result" class="rounded-lg bg-green-100 px-4 py-3 text-green-900 dark:bg-green-900/40 dark:text-green-100">
-        Результат: {{ result }}
+        {{ t("pages.home.result", { value: result }) }}
       </p>
     </div>
 

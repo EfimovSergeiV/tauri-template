@@ -1,0 +1,47 @@
+{
+  "app": {
+    "title": "Navigation between pages"
+  },
+  "menu": {
+    "home": "Home",
+    "charts": "Charts",
+    "darkmode": "Darkmode",
+    "about": "About",
+    "settings": "Settings",
+    "language": "Language",
+    "themeDark": "Dark theme",
+    "themeLight": "Light theme"
+  },
+  "test": {
+    "PropertyName": "Property name",
+    "PropertyValue": "Value"
+  },
+  "components": {
+    "Foo": "from JSX",
+    "ImportType": "import type should be removed without side-effect"
+  },
+  "pages": {
+    "home": {
+      "title": "Python in Tauri",
+      "description": "Enter a number, the app will pass it to Python and show the result multiplied by 4.",
+      "inputLabel": "Number",
+      "placeholder": "For example, 3.5",
+      "submit": "Multiply by 4",
+      "loading": "Calculating...",
+      "result": "Result: {value}",
+      "errors": {
+        "invalidNumber": "Enter a valid number.",
+        "pythonFailed": "Failed to execute the Python script."
+      },
+      "count": "count is: {value}",
+      "virtual": "msg from virtual module: {msg}",
+      "inter": "this will be styled with a font-face"
+    },
+    "about": {
+      "title": "About",
+      "description1": "This is a desktop app template built with Tauri, Vue 3, and vue-router.",
+      "description2": "The home page shows a working example of a Tauri command where Rust launches a Python script and returns the result back to the UI.",
+      "description3": "The about page is a separate route so the app is already prepared for splitting screens into dedicated pages as it grows."
+    }
+  }
+}
