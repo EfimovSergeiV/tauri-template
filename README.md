@@ -41,15 +41,14 @@ my-app/
 ├── src/                    # Vue/Tauri frontend
 │   ├── assets/
 │   ├── components/
-│   ├── composables/
-│   ├── layouts/
+│   ├── locales/
 │   ├── pages/
 │   ├── plugins/
 │   ├── router/
 │   ├── stores/
-│   ├── styles/
 │   ├── utils/
-│   └── App.vue
+│   ├── App.vue
+│   └── main.js
 │
 ├── src-tauri/
 │   ├── src/

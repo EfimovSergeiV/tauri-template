@@ -44,7 +44,7 @@
     <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
       <div>
         <p class="text-sm uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">Tauri + Vue Router</p>
-        <h1 class="mt-1 text-2xl font-semibold">{{ t("app.title") }}</h1>
+        <h1 class="mt-1 text-xl font-semibold">{{ t("app.title") }}</h1>
       </div>
 
       <div class="flex items-center gap-3">
