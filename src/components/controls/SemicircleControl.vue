@@ -44,7 +44,7 @@
 
 <template>
   <div class="flex flex-col items-center relative select-none">
-    <Doughnut :data="chartData" :options="chartOptions" class="w-[180px] h-[180px]" />
+    <Doughnut :data="chartData" :options="chartOptions" class="w-45 h-45" />
     <div class="text-gray-900 dark:text-white absolute bottom-10 text-4xl font-bold">{{ value }} Kw</div>
   </div>
 </template>
