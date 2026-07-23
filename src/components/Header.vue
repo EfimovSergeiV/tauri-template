@@ -57,6 +57,13 @@
             {{ t("menu.home") }}
           </RouterLink>
           <RouterLink
+            to="/charts"
+            class="rounded-lg px-4 py-2 text-sm transition"
+            :class="route.name === 'home' ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900' : 'text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white'"
+          >
+            Charts
+          </RouterLink>
+          <RouterLink
             to="/about"
             class="rounded-lg px-4 py-2 text-sm transition"
             :class="route.name === 'about' ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900' : 'text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white'"
