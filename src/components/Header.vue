@@ -2,7 +2,7 @@
   import { computed, onMounted, ref } from "vue";
   import { useI18n } from "vue-i18n";
   import { RouterLink, RouterView, useRoute } from "vue-router";
-  import { persistLocale } from "../i18n";
+  import { persistLocale } from "../utils/locale";
 
 
   const isDark = ref(false);
@@ -59,7 +59,7 @@
           <RouterLink
             to="/charts"
             class="rounded-lg px-4 py-2 text-sm transition"
-            :class="route.name === 'home' ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900' : 'text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white'"
+            :class="route.name === 'charts' ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900' : 'text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white'"
           >
             Charts
           </RouterLink>

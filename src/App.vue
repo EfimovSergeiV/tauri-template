@@ -2,7 +2,7 @@
 import { computed, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { RouterLink, RouterView, useRoute } from "vue-router";
-import { persistLocale } from "./i18n";
+import { persistLocale } from "./utils/locale";
 import Header from "./components/Header.vue";
 
 const isDark = ref(false);
