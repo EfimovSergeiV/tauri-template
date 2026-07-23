@@ -3,6 +3,7 @@ import { computed, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { RouterLink, RouterView, useRoute } from "vue-router";
 import { persistLocale } from "./i18n";
+import Header from "./components/Header.vue";
 
 const isDark = ref(false);
 const route = useRoute();
@@ -39,7 +40,7 @@ onMounted(() => {
 <template>
   <main class="min-h-screen bg-gray-300 px-6 py-10 text-gray-900 transition-colors dark:bg-gray-600 dark:text-gray-100">
     <div class="mx-auto flex w-full max-w-5xl flex-col gap-6">
-      <header class="rounded-2xl bg-white p-5 shadow-lg shadow-gray-500/20 dark:bg-gray-800">
+      <!-- <header class="rounded-2xl bg-white p-5 shadow-lg shadow-gray-500/20 dark:bg-gray-800">
         <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <p class="text-sm uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">Tauri + Vue Router</p>
@@ -84,7 +85,9 @@ onMounted(() => {
             </button>
           </div>
         </div>
-      </header>
+      </header> -->
+
+      <Header />
 
       <RouterView v-slot="{ Component, route: currentRoute }">
         <Transition name="page" mode="out-in">
