@@ -9,10 +9,30 @@ use std::{
 };
 #[cfg(windows)]
 use std::os::windows::process::CommandExt;
-use tauri::Emitter;
+use tauri::{Emitter, Manager};
 
 #[cfg(windows)]
 const CREATE_NO_WINDOW: u32 = 0x08000000;
+
+fn resolve_python_script_path(app: &tauri::AppHandle, file_name: &str) -> PathBuf {
+    let resource_path = app
+        .path()
+        .resolve(
+            PathBuf::from("python").join(file_name),
+            tauri::path::BaseDirectory::Resource,
+        )
+        .ok();
+
+    if let Some(path) = resource_path {
+        if path.exists() {
+            return path;
+        }
+    }
+
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../python")
+        .join(file_name)
+}
 
 #[derive(Clone)]
 struct CounterProcessState {
@@ -30,9 +50,8 @@ impl Default for CounterProcessState {
 }
 
 #[tauri::command]
-fn multiply_by_four(value: f64) -> Result<f64, String> {
-    let script_path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("../python/multiply_by_four.py");
+fn multiply_by_four(app: tauri::AppHandle, value: f64) -> Result<f64, String> {
+    let script_path = resolve_python_script_path(&app, "multiply_by_four.py");
 
     #[cfg(windows)]
     let python_bin = "python";
@@ -68,9 +87,8 @@ fn multiply_by_four(value: f64) -> Result<f64, String> {
 }
 
 #[tauri::command]
-fn count_one_to_hundred() -> Result<Vec<u32>, String> {
-    let script_path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("../python/count_one_to_hundred.py");
+fn count_one_to_hundred(app: tauri::AppHandle) -> Result<Vec<u32>, String> {
+    let script_path = resolve_python_script_path(&app, "count_one_to_hundred.py");
 
     #[cfg(windows)]
     let python_bin = "python";
@@ -115,8 +133,7 @@ fn count_one_to_hundred_stream(
     app: tauri::AppHandle,
     state: tauri::State<CounterProcessState>,
 ) -> Result<(), String> {
-    let script_path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("../python/count_one_to_hundred.py");
+    let script_path = resolve_python_script_path(&app, "count_one_to_hundred.py");
 
     #[cfg(windows)]
     let python_bin = "python";
