@@ -3,6 +3,7 @@
   import { useI18n } from "vue-i18n";
   import { invoke } from "@tauri-apps/api/core";
   import { useCounterStore } from '../stores/counter'
+import ThreeJS from "../components/graphics/ThreeJS.vue";
   
   const counter = useCounterStore()
 
@@ -79,9 +80,14 @@
       </p>
     </section>
 
-    <section>
+    <section class="flex">
+
 
       <p class="font-semibold">ЧИСЛО ИЗ STORE: {{ counter.valueKw }}</p>
+
+      <ThreeJS />
+
+      <img src="../assets/mask.png" class="h-24" alt="Vite logo" />
 
     </section>
   </div>
