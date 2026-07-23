@@ -5,3 +5,98 @@ This template should help get you started developing with Tauri + Vue 3 in Vite.
 ## Recommended IDE Setup
 
 - [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+
+
+### build requirements
+
+```zsh
+Python +3.11.2
+NodeJS +v20.19.2
+Rust 1.97.1
+```
+
+
+### Developer server
+
+```zsh
+npm install
+npm run tauri dev
+
+```
+
+### Build production
+
+```zsh
+npm run tauri build
+
+```
+
+
+# Perfect structure
+
+```zsh
+
+my-app/
+│
+├── src/                    # Vue/Tauri frontend
+│   ├── assets/
+│   ├── components/
+│   ├── composables/
+│   ├── layouts/
+│   ├── pages/
+│   ├── plugins/
+│   ├── router/
+│   ├── stores/
+│   ├── styles/
+│   ├── utils/
+│   └── App.vue
+│
+├── src-tauri/
+│   ├── src/
+│   │   └── main.rs         # Минимум Rust
+│   ├── icons/
+│   ├── tauri.conf.json
+│   └── Cargo.toml
+│
+├── python/
+│   ├── app.py              # Точка входа
+│   │
+│   ├── api/
+│   │   ├── music.py
+│   │   ├── settings.py
+│   │   └── files.py
+│   │
+│   ├── services/
+│   │   ├── player.py
+│   │   ├── downloader.py
+│   │   ├── metadata.py
+│   │   └── audio.py
+│   │
+│   ├── models/
+│   │   ├── song.py
+│   │   └── playlist.py
+│   │
+│   ├── database/
+│   │   ├── db.py
+│   │   └── migrations/
+│   │
+│   ├── utils/
+│   │   ├── logger.py
+│   │   ├── config.py
+│   │   └── helpers.py
+│   │
+│   ├── workers/
+│   │   ├── scanner.py
+│   │   └── converter.py
+│   │
+│   └── requirements.txt
+│
+├── resources/
+│
+├── scripts/
+│
+├── package.json
+├── pyproject.toml
+└── README.md
+
+```

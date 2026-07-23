@@ -93,9 +93,11 @@ async function multiplyByFour() {
         {{ isLoading ? "Вычисляем..." : "Умножить на 4" }}
       </button>
 
-      <p v-if="result" class="mt-4 rounded-lg bg-green-100 px-4 py-3 text-green-900 dark:bg-green-900/40 dark:text-green-100">
-        Результат: {{ result }}
-      </p>
+      <div class="mt-4 h-10">
+        <p v-if="result" class="rounded-lg bg-green-100 px-4 py-3 text-green-900 dark:bg-green-900/40 dark:text-green-100">
+          Результат: {{ result }}
+        </p>        
+      </div>
 
       <p v-if="errorMessage" class="mt-4 rounded-lg bg-red-100 px-4 py-3 text-red-900 dark:bg-red-900/40 dark:text-red-100">
         {{ errorMessage }}
