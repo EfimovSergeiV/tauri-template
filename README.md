@@ -51,16 +51,11 @@ my-app/
 │   └── main.js
 │
 ├── src-tauri/
-│   ├── src/
-│   │   └── main.rs         # Минимум Rust
-│   ├── icons/
-│   ├── tauri.conf.json
-│   └── Cargo.toml
-│
-├── src-tauri/
 │   ├── python/
-│   │   ├── count_one_to_hundred.py
-│   │   └── multiply_by_four.py
+│   │   ├── service-1.py
+│   │   └── service-2.py
+│   │   └── service-3.py
+│   │   └── ...
 │   │
 │   ├── src/
 │   │   └── main.rs         # Минимум Rust

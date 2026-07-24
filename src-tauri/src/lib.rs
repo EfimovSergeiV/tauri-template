@@ -9,10 +9,43 @@ use std::{
 };
 #[cfg(windows)]
 use std::os::windows::process::CommandExt;
+use serde_json::{json, Value};
 use tauri::{Emitter, Manager};
 
 #[cfg(windows)]
 const CREATE_NO_WINDOW: u32 = 0x08000000;
+
+fn parse_counter_line_to_number(line: &str) -> Result<u32, String> {
+    if let Ok(number) = line.parse::<u32>() {
+        return Ok(number);
+    }
+
+    let value: Value = serde_json::from_str(line)
+        .map_err(|error| format!("Некорректный JSON от Python-скрипта: {error}"))?;
+
+    let number = value
+        .get("number")
+        .and_then(Value::as_u64)
+        .ok_or_else(|| "JSON от Python-скрипта не содержит поле number".to_string())?;
+
+    u32::try_from(number)
+        .map_err(|_| "Поле number в JSON выходит за пределы u32".to_string())
+}
+
+fn parse_counter_line_to_payload(line: &str) -> Result<Value, String> {
+    if let Ok(value) = serde_json::from_str::<Value>(line) {
+        if value.get("number").and_then(Value::as_u64).is_some() {
+            return Ok(value);
+        }
+
+        return Err("JSON от Python-скрипта не содержит поле number".to_string());
+    }
+
+    let number = line
+        .parse::<u32>()
+        .map_err(|error| format!("Некорректная строка от Python-скрипта: {error}"))?;
+    Ok(json!({ "number": number }))
+}
 
 fn resolve_python_script_path(app: &tauri::AppHandle, file_name: &str) -> PathBuf {
     app.path()
@@ -110,9 +143,7 @@ fn count_one_to_hundred(app: tauri::AppHandle) -> Result<Vec<u32>, String> {
         .lines()
         .filter(|line| !line.trim().is_empty())
         .map(|line| {
-            line.trim()
-                .parse::<u32>()
-                .map_err(|error| format!("Некорректная строка от Python-скрипта: {error}"))
+            parse_counter_line_to_number(line.trim())
         })
         .collect()
 }
@@ -179,14 +210,14 @@ fn count_one_to_hundred_stream(
                         continue;
                     }
 
-                    match trimmed.parse::<u32>() {
-                        Ok(number) => {
-                            let _ = app.emit("counter-stream-value", number);
+                    match parse_counter_line_to_payload(trimmed) {
+                        Ok(payload) => {
+                            let _ = app.emit("counter-stream-value", payload);
                         }
                         Err(error) => {
                             let _ = app.emit(
                                 "counter-stream-error",
-                                format!("Некорректная строка от Python-скрипта: {error}"),
+                                error,
                             );
                             if let Ok(mut guard) = child_state.lock() {
                                 if let Some(child) = guard.as_mut() {

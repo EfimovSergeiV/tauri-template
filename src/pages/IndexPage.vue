@@ -77,7 +77,8 @@
     clearCounterListeners();
 
     unlistenCounterValue = await listen("counter-stream-value", (event) => {
-      const number = Number(event.payload);
+      const payload = event.payload;
+      const number = Number(payload?.number);
       if (Number.isFinite(number)) {
         counterValues.value.push(number);
       }
@@ -194,7 +195,7 @@
           v-if="counterValues.length"
           class="rounded-lg bg-blue-100 px-4 py-3 text-blue-900 dark:bg-blue-900/40 dark:text-blue-100"
         >
-          Получено {{ counterValues.length }} чисел. Последнее: {{ counterValues[counterValues.length - 1] }}
+          Получено {{ counterValues }} чисел. Последнее: {{ counterValues[counterValues.length - 1] }}
         </p>
       </div>
 
