@@ -15,23 +15,12 @@ use tauri::{Emitter, Manager};
 const CREATE_NO_WINDOW: u32 = 0x08000000;
 
 fn resolve_python_script_path(app: &tauri::AppHandle, file_name: &str) -> PathBuf {
-    let resource_path = app
-        .path()
+    app.path()
         .resolve(
             PathBuf::from("python").join(file_name),
             tauri::path::BaseDirectory::Resource,
         )
-        .ok();
-
-    if let Some(path) = resource_path {
-        if path.exists() {
-            return path;
-        }
-    }
-
-    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("../python")
-        .join(file_name)
+        .expect("Python script is missing from the bundled resources")
 }
 
 #[derive(Clone)]

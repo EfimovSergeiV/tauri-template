@@ -57,6 +57,17 @@ my-app/
 │   ├── tauri.conf.json
 │   └── Cargo.toml
 │
+├── src-tauri/
+│   ├── python/
+│   │   ├── count_one_to_hundred.py
+│   │   └── multiply_by_four.py
+│   │
+│   ├── src/
+│   │   └── main.rs         # Минимум Rust
+│   ├── icons/
+│   ├── tauri.conf.json
+│   └── Cargo.toml
+
 ├── python/
 │   ├── app.py              # Точка входа
 │   │

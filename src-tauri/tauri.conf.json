@@ -13,8 +13,8 @@
     "windows": [
       {
         "title": "tauri-template",
-        "width": 800,
-        "height": 600
+        "width": 1366,
+        "height": 768
       }
     ],
     "security": {
@@ -25,7 +25,7 @@
     "active": true,
     "targets": "all",
     "resources": [
-      "../python/*.py"
+      "python/*.py"
     ],
     "icon": [
       "icons/32x32.png",
